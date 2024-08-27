@@ -1,79 +1,49 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+// import JSON from './components/JSON.vue'
+import BHeader from "./components/NavigationBar.vue";
+import MenuBar from './components/MenuBar.vue';
 </script>
 
 <template>
-  <!-- <div>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </div> -->
+  <header>
+    <MenuBar />
+  </header>
+  <!-- <JSON/> -->
 
-  <RouterView />
+  <main class="main-box">
+    <router-view></router-view>
+    <!-- <LoginForm /> -->
+  </main>
 </template>
 
-<style scoped>
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
+<!-- <style scoped>
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  background-color: #275fda;
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+.list-group-item {
+  padding: 10px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.card-padding {
+  padding: 1rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.spaced-text {
+  min-height: 60px; /* Adjust as needed */
+  min-width: 20px; /* Adjust as needed */
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
-</style>
+</style> -->

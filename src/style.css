@@ -1,0 +1,35 @@
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.form {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* ID selectors */
+#username:focus,
+#password:focus,
+#isAustralian:focus,
+#reason:focus {
+  border-color: #ff6347; /* More obvious border color change (Tomato) */
+  background-color: #ffebe8; /* Light background color change */
+}
+
+/* Attribute selectors */
+select[id="gender"] {
+  background-color: #dccccc; /* Default background color set to gray */
+}
+
+/* Class selectors */
+.button {
+  background-color: #ff6347; /* Tomato */
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
