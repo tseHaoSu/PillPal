@@ -1,4 +1,3 @@
-
 <template>
   <div id="container">
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
@@ -7,7 +6,10 @@
         <span class="text-600 font-medium line-height-3">
           Don't have an account?
         </span>
-        <router-link to="/register" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
+        <router-link
+          to="/register"
+          class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+        >
           Create today!
         </router-link>
       </div>
@@ -54,7 +56,9 @@
             />
             <label for="rememberme">Remember me</label>
           </div>
-          <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">
+          <a
+            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+          >
             Forgot password?
           </a>
         </div>
@@ -79,16 +83,16 @@ import Button from "primevue/button";
 import Checkbox from "primevue/checkbox";
 
 export default {
-    components: {
+  components: {
     InputText,
     Button,
     Checkbox,
   },
 
-  data(){
-    return{
+  data() {
+    return {
       rememberMe: false,
-    }
+    };
   },
   name: "LoginView",
   setup() {
@@ -107,10 +111,8 @@ export default {
       } else {
         window.location.href = "/access-denied";
       }
-      
     };
 
-    
     return {
       username,
       password,

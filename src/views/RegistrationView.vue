@@ -6,9 +6,12 @@
         <span class="text-600 font-medium line-height-3">
           Already have an account?
         </span>
-        <router-link to="/" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
-      Log in here!
-    </router-link>
+        <router-link
+          to="/"
+          class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+        >
+          Log in here!
+        </router-link>
       </div>
 
       <form @submit.prevent="handleRegister">
@@ -118,7 +121,12 @@ export default {
 
     const handleRegister = () => {
       // Basic validation logic for registration
-      if (!username.value || !email.value || !password.value || !confirmPassword.value) {
+      if (
+        !username.value ||
+        !email.value ||
+        !password.value ||
+        !confirmPassword.value
+      ) {
         error.value = "All fields are required.";
         return;
       }
@@ -135,7 +143,10 @@ export default {
 
       // Clear error and proceed with registration logic
       error.value = "";
-      console.log("User registered:", { username: username.value, email: email.value });
+      console.log("User registered:", {
+        username: username.value,
+        email: email.value,
+      });
 
       // Implement actual registration logic here (e.g., API call)
     };

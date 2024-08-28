@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import HomeView from '../views/HomeView.vue'
 import AboutView from "../views/AboutView.vue";
 import UserInformationView from "@/views/UserInformationView.vue";
 import AccessDeniedView from "@/views/AccessDenied.vue";
 import LoginPageView from "@/views/LoginPage.vue";
 import RegistrationView from "@/views/RegistrationView.vue";
+import DataView from "@/views/DataView.vue";
 
 const routes = [
   {
@@ -32,7 +32,12 @@ const routes = [
   {
     path: "/register",
     name: "Register",
-    component: RegistrationView
+    component: RegistrationView,
+  },
+  {
+    path: "/data",
+    name: "Data",
+    component: DataView,
   }
 ];
 

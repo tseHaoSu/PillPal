@@ -1,54 +1,64 @@
 <template>
-    <div v-if="isAuthenticated">
-        <Menubar :model="items" />
-    </div>
-   
-
+  <div v-if="isAuthenticated">
+    <Menubar :model="items" />
+  </div>
 </template>
 
 <script>
-import Menubar from 'primevue/menubar';
-import Ripple from 'primevue/ripple';
-import { ref } from 'vue'; 
+import Menubar from "primevue/menubar";
+import Ripple from "primevue/ripple";
+import { ref } from "vue";
 
 export default {
-    components: {
-        Menubar,
-    },
-    directives: {
-        Ripple
-    },
-    setup() {
-       const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true');
-       return {
-           isAuthenticated
-       };
-    },
-    data() {
-        return {
-            items: [
-                {
-                    label: 'About',
-                    command: () => {
-                        this.$router.push('/about');
-                    }
-                },
-                {
-                    label: 'User info',
-                    command: () => {
-                        this.$router.push('/home');
-                    }
-                },
-                {
-                    label: 'logout',
-                    command: () => {
-                        localStorage.removeItem('isAuthenticated');
-                        window.location.href = '/';
-                    },
-                }
-            ]
-        };
-    }
+  components: {
+    Menubar,
+  },
+  directives: {
+    Ripple,
+  },
+  setup() {
+    const isAuthenticated = ref(
+      localStorage.getItem("isAuthenticated") === "true",
+    );
+    return {
+      isAuthenticated,
+    };
+  },
+  data() {
+    return {
+      items: [
+        {
+          label: "About",
+          icon: "pi pi-fw pi-info",
+          command: () => {
+            window.location.href = "/about";
+          },
+        },
+        {
+          label: "User info",
+          icon: "pi pi-fw pi-plus",
+          command: () => {
+            window.location.href = "/home";
+          },
+        },
+        {
+          label: "Data",
+          icon: "pi pi-fw pi-table",
+          command: () => {
+            window.location.href = "/data";
+          },
+        },
+        {
+          label: "logout",
+          icon: "pi pi-fw pi-power-off",
+          command: () => {
+            localStorage.removeItem("isAuthenticated");
+            window.location.href = "/";
+          },
+        },
+      ],
+    };
+  },
 };
 </script>
 

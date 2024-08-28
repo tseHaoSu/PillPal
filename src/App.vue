@@ -1,7 +1,7 @@
 <script setup>
 // import JSON from './components/JSON.vue'
 import BHeader from "./components/NavigationBar.vue";
-import MenuBar from './components/MenuBar.vue';
+import MenuBar from "./components/MenuBar.vue";
 </script>
 
 <template>

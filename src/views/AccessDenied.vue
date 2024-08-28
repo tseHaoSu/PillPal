@@ -14,7 +14,7 @@ export default {
   name: "AccessDeniedView",
   methods: {
     redirectToLogin() {
-      this.$router.push("/");
+      window.location.href = "/";
     },
   },
 };

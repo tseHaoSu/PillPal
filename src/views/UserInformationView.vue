@@ -146,6 +146,11 @@
         :header="col.header"
       >
       </Column>
+      <Column field="rating" header="Reviews">
+        <template #body="slotProps">
+          <Rating :modelValue="slotProps.data.rating" readonly />
+        </template>
+      </Column>
     </DataTable>
   </div>
 </template>
