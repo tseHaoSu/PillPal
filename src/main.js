@@ -1,5 +1,7 @@
 //import bootstrap css
 import "bootstrap/dist/css/bootstrap.css";
+// import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+
 
 // Import Vue and Vue Router
 import router from "./router";
@@ -13,17 +15,15 @@ import Badge from "primevue/badge";
 import Ripple from "primevue/ripple";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
+import FloatLabel from "primevue/floatlabel";
+import Inputtext from "primevue/inputtext";
+import Button from "primevue/button";
 
 //Import PrimeVue CSS files
 import "primevue/resources/themes/saga-blue/theme.css"; 
 import "primevue/resources/primevue.min.css"; 
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
-
-//testing aura theme
-// import Aura from "@primevue/themes/aura";
-// import "@/assets/styles.scss";
-// import "@/assets/tailwind.css";
 
 //import APP
 import { createApp } from "vue";
@@ -36,14 +36,8 @@ app.use(PrimeVue, {
   ripple: true,
   inputStyle: "outlined",
 });
-// app.use(PrimeVue, {
-//   theme: {
-//     preset: Aura,
-//     options: {
-//       darkModeSelector: ".app-dark",
-//     },
-//   },
-// });
+
+
 
 app.component("Menubar", Menubar);
 app.component("InputText", InputText);
@@ -51,8 +45,10 @@ app.component("Avatar", Avatar);
 app.component("Badge", Badge);
 app.component("DataTable", DataTable);
 app.component("Column", Column);
+app.component("FloatLabel", FloatLabel);
+app.component("Inputtext", Inputtext);
+app.component("Button", Button);
 
 app.directive("ripple", Ripple);
-
 
 app.mount("#app");

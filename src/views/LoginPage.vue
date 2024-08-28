@@ -1,8 +1,8 @@
 <template>
-  <div id="container">
+  <div id="container-login">
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
       <div class="text-center mb-5">
-        <div class="text-900 text-3xl font-medium mb-3">Login</div>
+        <h1>Login</h1>
         <span class="text-600 font-medium line-height-3">
           Don't have an account?
         </span>
@@ -124,6 +124,15 @@ export default {
 </script>
 
 <style scoped>
+#container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
 .login {
   text-align: center;
   margin-top: 50px;
