@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isAuthenticated">
-    <Menubar :model="items" />
+  <div v-if="isAuthenticated" class="menubar-wrapper">
+    <Menubar :model="items" class="menubar-custom" />
   </div>
 </template>
 
@@ -63,19 +63,70 @@ export default {
 </script>
 
 <style scoped>
-/* Your component's CSS styles go here */
+.menubar-wrapper {
+  padding: 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
 .menubar-custom {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .menubar-custom .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
-  color: #495057;
+  color: #3B82F6;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .menubar-custom .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
-  background-color: #e9ecef;
-  color: #212529;
+  background-color: #3B82F6;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+  color: #3B82F6;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover .p-menuitem-icon {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem:last-child > .p-menuitem-link {
+  background-color: #EF4444;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem:last-child > .p-menuitem-link:hover {
+  background-color: #DC2626;
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem:last-child > .p-menuitem-link .p-menuitem-icon {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menubar-custom .p-menubar-root-list > .p-menuitem:last-child > .p-menuitem-link:hover .p-menuitem-icon {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 </style>

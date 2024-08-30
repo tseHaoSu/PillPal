@@ -1,17 +1,17 @@
 <template>
   <div id="container-login">
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-      <div class="text-center mb-5">
-        <h1>Login</h1>
-        <span class="text-600 font-medium line-height-3">
+    <div class="surface-card p-6 shadow-3 border-round w-full lg:w-6">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold text-primary mb-2">Welcome Back</h1>
+        <p class="text-600 font-medium">
           Don't have an account?
-        </span>
-        <router-link
-          to="/register"
-          class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-        >
-          Create today!
-        </router-link>
+          <router-link
+            to="/register"
+            class="font-bold text-primary-600 hover:underline"
+          >
+            Create one today!
+          </router-link>
+        </p>
       </div>
 
       <form @submit.prevent="handleLogin">
@@ -54,23 +54,23 @@
               v-model="rememberMe"
               class="mr-2"
             />
-            <label for="rememberme">Remember me</label>
+            <label for="rememberme" class="font-medium">Remember me</label>
           </div>
           <a
-            class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+            class="font-bold text-primary-600 hover:underline cursor-pointer"
           >
             Forgot password?
           </a>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="p-button p-component w-full">
-          <span class="p-button-icon pi pi-user"></span>
+        <button type="submit" class="p-button p-component w-full text-xl font-bold p-3">
+          <span class="p-button-icon pi pi-user mr-2"></span>
           <span class="p-button-label">Login</span>
         </button>
 
         <!-- Error Message -->
-        <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
+        <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
       </form>
     </div>
   </div>
@@ -130,15 +130,35 @@ export default {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.login {
-  text-align: center;
-  margin-top: 50px;
+.surface-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
 }
 
-.btn {
-  margin-top: 10px;
+.text-primary {
+  color: #3B82F6;
+}
+
+.text-primary-600 {
+  color: #2563EB;
+}
+
+.p-button {
+  background-color: #3B82F6;
+  border-color: #3B82F6;
+  transition: all 0.3s ease;
+}
+
+.p-button:hover {
+  background-color: #2563EB;
+  border-color: #2563EB;
+}
+
+.p-inputtext:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
 }
 </style>

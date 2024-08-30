@@ -1,17 +1,17 @@
 <template>
-  <div id="container">
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-      <div class="text-center mb-5">
-        <div class="text-900 text-3xl font-medium mb-3">Register</div>
-        <span class="text-600 font-medium line-height-3">
+  <div id="container-register">
+    <div class="surface-card p-6 shadow-3 border-round w-full lg:w-6">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold text-primary mb-2">Create Account</h1>
+        <p class="text-600 font-medium">
           Already have an account?
-        </span>
-        <router-link
-          to="/"
-          class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-        >
-          Log in here!
-        </router-link>
+          <router-link
+            to="/"
+            class="font-bold text-primary-600 hover:underline"
+          >
+            Log in here!
+          </router-link>
+        </p>
       </div>
 
       <form @submit.prevent="handleRegister">
@@ -76,26 +76,24 @@
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="flex align-items-center justify-content-between mb-6">
-          <div class="flex align-items-center">
-            <Checkbox
-              id="terms"
-              :binary="true"
-              v-model="acceptTerms"
-              class="mr-2"
-            />
-            <label for="terms">I accept the terms and conditions</label>
-          </div>
+        <div class="flex align-items-center mb-6">
+          <Checkbox
+            id="terms"
+            :binary="true"
+            v-model="acceptTerms"
+            class="mr-2"
+          />
+          <label for="terms" class="font-medium">I accept the terms and conditions</label>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="p-button p-component w-full">
-          <span class="p-button-icon pi pi-user-plus"></span>
+        <button type="submit" class="p-button p-component w-full text-xl font-bold p-3">
+          <span class="p-button-icon pi pi-user-plus mr-2"></span>
           <span class="p-button-label">Register</span>
         </button>
 
         <!-- Error Message -->
-        <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
+        <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
       </form>
     </div>
   </div>
@@ -169,3 +167,43 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#container-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.surface-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.text-primary {
+  color: #3B82F6;
+}
+
+.text-primary-600 {
+  color: #2563EB;
+}
+
+.p-button {
+  background-color: #3B82F6;
+  border-color: #3B82F6;
+  transition: all 0.3s ease;
+}
+
+.p-button:hover {
+  background-color: #2563EB;
+  border-color: #2563EB;
+}
+
+.p-inputtext:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+</style>
