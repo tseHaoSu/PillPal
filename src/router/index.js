@@ -38,7 +38,7 @@ const routes = [
     path: "/data",
     name: "Data",
     component: DataView,
-  }
+  },
 ];
 
 const router = createRouter({

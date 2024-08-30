@@ -83,11 +83,16 @@
             v-model="acceptTerms"
             class="mr-2"
           />
-          <label for="terms" class="font-medium">I accept the terms and conditions</label>
+          <label for="terms" class="font-medium"
+            >I accept the terms and conditions</label
+          >
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="p-button p-component w-full text-xl font-bold p-3">
+        <button
+          type="submit"
+          class="p-button p-component w-full text-xl font-bold p-3"
+        >
           <span class="p-button-icon pi pi-user-plus mr-2"></span>
           <span class="p-button-label">Register</span>
         </button>
@@ -184,26 +189,26 @@ export default {
 }
 
 .text-primary {
-  color: #3B82F6;
+  color: #3b82f6;
 }
 
 .text-primary-600 {
-  color: #2563EB;
+  color: #2563eb;
 }
 
 .p-button {
-  background-color: #3B82F6;
-  border-color: #3B82F6;
+  background-color: #3b82f6;
+  border-color: #3b82f6;
   transition: all 0.3s ease;
 }
 
 .p-button:hover {
-  background-color: #2563EB;
-  border-color: #2563EB;
+  background-color: #2563eb;
+  border-color: #2563eb;
 }
 
 .p-inputtext:focus {
-  border-color: #3B82F6;
+  border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
 }
 </style>

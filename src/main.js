@@ -2,7 +2,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 // import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
-
 // Import Vue and Vue Router
 import router from "./router";
 
@@ -20,8 +19,8 @@ import Inputtext from "primevue/inputtext";
 import Button from "primevue/button";
 
 //Import PrimeVue CSS files
-import "primevue/resources/themes/saga-blue/theme.css"; 
-import "primevue/resources/primevue.min.css"; 
+import "primevue/resources/themes/saga-blue/theme.css";
+import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 
@@ -36,8 +35,6 @@ app.use(PrimeVue, {
   ripple: true,
   inputStyle: "outlined",
 });
-
-
 
 app.component("Menubar", Menubar);
 app.component("InputText", InputText);
