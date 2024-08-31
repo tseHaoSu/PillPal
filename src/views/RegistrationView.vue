@@ -136,6 +136,7 @@ const validatePassword = () => {
   } else if (!isValidPassword(password.value)) {
     errors.value.password = "Password requires 8 characters, 1 uppercase letter, and 1 number.";
   }
+}
 
 const validateConfirmPassword = () => {
   if (!confirmPassword.value) {
@@ -143,10 +144,14 @@ const validateConfirmPassword = () => {
   } else if (password.value !== confirmPassword.value) {
     errors.value.confirmPassword = "Passwords do not match.";
   }
+};
+
 const validateTerms = () => {
   if (!acceptTerms.value) {
     errors.value.acceptTerms = "You must accept the terms and conditions.";
   }
+};
+
 const validateForm = () => {
   errors.value = {};
   validateEmail();
@@ -161,14 +166,21 @@ const handleRegister = async () => {
     return;
   }
   try {
-    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+    console.log("User registered:", userCredential.user);
     router.push("/login");
   } catch (err) {
-    generalError.value = err.message;
+    console.error("Registration error:", err);
+    switch(err.code){
+    case "auth/email-already-in-use":
+      generalError.value = "Email is already in use.";
+      break;
+    }
+    alert("Error registering.")
   }
 }
 
-};
+
 
 </script>
 
