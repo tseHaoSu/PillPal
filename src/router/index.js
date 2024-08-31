@@ -20,7 +20,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: LoginPageView,
   },
@@ -39,6 +39,11 @@ const routes = [
     name: "Data",
     component: DataView,
   },
+  //redirect route
+  {
+    path: "/",
+    redirect: "/login",
+  },
 ];
 
 const router = createRouter({
@@ -47,7 +52,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
 
   if (to.meta.requiresAuth && !isAuthenticated) {
     next("/access-denied");

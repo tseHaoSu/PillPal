@@ -6,7 +6,7 @@
         <p class="text-600 font-medium">
           Already have an account?
           <router-link
-            to="/"
+            to="/login"
             class="font-bold text-primary-600 hover:underline"
           >
             Log in here!
@@ -15,21 +15,6 @@
       </div>
 
       <form @submit.prevent="handleRegister">
-        <!-- Username Field -->
-        <div class="mb-3">
-          <label for="username" class="block text-900 font-medium mb-2">
-            Username
-          </label>
-          <InputText
-            id="username"
-            v-model="username"
-            type="text"
-            placeholder="Username"
-            class="w-full"
-            required
-          />
-        </div>
-
         <!-- Email Field -->
         <div class="mb-3">
           <label for="email" class="block text-900 font-medium mb-2">
@@ -76,16 +61,18 @@
         </div>
 
         <!-- Terms and Conditions -->
-        <div class="flex align-items-center mb-6">
-          <Checkbox
-            id="terms"
-            :binary="true"
-            v-model="acceptTerms"
-            class="mr-2"
-          />
-          <label for="terms" class="font-medium"
-            >I accept the terms and conditions</label
-          >
+        <div class="flex align-items-center justify-content-between mb-6">
+          <div class="flex align-items-center">
+            <Checkbox
+              id="acceptTerms"
+              :binary="true"
+              v-model="acceptTerms"
+              class="mr-2"
+            />
+            <label for="acceptTerms" class="font-medium"
+              >I agree to the terms and conditions</label
+            >
+          </div>
         </div>
 
         <!-- Submit Button -->
@@ -104,73 +91,85 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
-import InputText from "primevue/inputtext";
-import Checkbox from "primevue/checkbox";
+import { useRouter } from "vue-router";
+import { auth, createUserWithEmailAndPassword } from "../firebase/firebase.js";
+import Checkbox from 'primevue/checkbox';
 
-export default {
-  components: {
-    InputText,
-    Checkbox,
-  },
-  setup() {
-    const username = ref("");
-    const email = ref("");
-    const password = ref("");
-    const confirmPassword = ref("");
-    const acceptTerms = ref(false);
-    const error = ref("");
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
+const acceptTerms = ref(false);
+const errors = ref({});
+const generalError = ref("");
 
-    const handleRegister = () => {
-      // Basic validation logic for registration
-      if (
-        !username.value ||
-        !email.value ||
-        !password.value ||
-        !confirmPassword.value
-      ) {
-        error.value = "All fields are required.";
-        return;
-      }
-
-      if (password.value !== confirmPassword.value) {
-        error.value = "Passwords do not match.";
-        return;
-      }
-
-      if (!acceptTerms.value) {
-        error.value = "You must accept the terms and conditions.";
-        return;
-      }
-
-      // Clear error and proceed with registration logic
-      error.value = "";
-      console.log("User registered:", {
-        username: username.value,
-        email: email.value,
-      });
-
-      // Implement actual registration logic here (e.g., API call)
-    };
-
-    const redirectToLogin = () => {
-      // Implement redirection logic to the login page
-      console.log("Redirecting to login page...");
-    };
-
-    return {
-      username,
-      email,
-      password,
-      confirmPassword,
-      acceptTerms,
-      error,
-      handleRegister,
-      redirectToLogin,
-    };
-  },
+const isValidEmail = (email) => {
+  return email.includes("@") && email.includes(".");
 };
+
+const isValidPassword = (password) => {
+  if(password.length < 8) {
+    return false;
+  }
+  if(!/[A-Z]/.test(password)) {
+    return false;
+  }
+  if(!/[0-9]/.test(password)) {
+    return false;
+  }
+  return true;
+};
+
+const validateEmail = () => {
+  if (!email.value) {
+    errors.value.email = "Email is required.";
+  } else if (!isValidEmail(email.value)) {
+    errors.value.email = "Please enter a valid email address.";
+  }
+};
+
+const validatePassword = () => {
+  if (!password.value) {
+    errors.value.password = "Password is required.";
+  } else if (!isValidPassword(password.value)) {
+    errors.value.password = "Password requires 8 characters, 1 uppercase letter, and 1 number.";
+  }
+
+const validateConfirmPassword = () => {
+  if (!confirmPassword.value) {
+    errors.value.confirmPassword = "Confirm password is required.";
+  } else if (password.value !== confirmPassword.value) {
+    errors.value.confirmPassword = "Passwords do not match.";
+  }
+const validateTerms = () => {
+  if (!acceptTerms.value) {
+    errors.value.acceptTerms = "You must accept the terms and conditions.";
+  }
+const validateForm = () => {
+  errors.value = {};
+  validateEmail();
+  validatePassword();
+  validateConfirmPassword();
+  validateTerms();
+  return Object.keys(errors.value).length === 0;
+};
+
+const handleRegister = async () => {
+  if (!validateForm()) {
+    return;
+  }
+  try {
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    router.push("/login");
+  } catch (err) {
+    generalError.value = err.message;
+  }
+}
+
+};
+
 </script>
 
 <style scoped>

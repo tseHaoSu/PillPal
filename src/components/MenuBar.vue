@@ -5,39 +5,63 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import { auth } from "../firebase/firebase.js";
+import { onAuthStateChanged } from "firebase/auth";
 
-const isAuthenticated = ref(localStorage.getItem("isAuthenticated") === "true");
+const router = useRouter();
+const isAuthenticated = ref(false);
+
+let unsubscribe;
+
+onMounted(() => {
+  unsubscribe = onAuthStateChanged(auth, (user) => {
+    isAuthenticated.value = !!user;
+    if (user) {
+      sessionStorage.setItem("isAuthenticated", "true");
+    } else {
+      sessionStorage.removeItem("isAuthenticated");
+    }
+  });
+});
+
+onUnmounted(() => {
+  if (unsubscribe) unsubscribe();
+});
+
+//handle logout and clear local storage
+const handleLogout = async () => {
+  try {
+    await auth.signOut();
+    sessionStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userEmail");
+    router.push("/login");
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
 
 const items = [
   {
     label: "About",
     icon: "pi pi-fw pi-info",
-    command: () => {
-      window.location.href = "/about";
-    },
+    command: () => router.push("/about"),
   },
   {
     label: "User info",
-    icon: "pi pi-fw pi-plus",
-    command: () => {
-      window.location.href = "/home";
-    },
+    icon: "pi pi-fw pi-user",
+    command: () => router.push("/home"),
   },
   {
     label: "Data",
     icon: "pi pi-fw pi-table",
-    command: () => {
-      window.location.href = "/data";
-    },
+    command: () => router.push("/data"),
   },
   {
-    label: "logout",
+    label: "Logout",
     icon: "pi pi-fw pi-power-off",
-    command: () => {
-      localStorage.removeItem("isAuthenticated");
-      window.location.href = "/";
-    },
+    command: handleLogout,
     class: 'logout-item'
   },
 ];

@@ -15,16 +15,16 @@
       </div>
 
       <form @submit.prevent="handleLogin">
-        <!-- Username Field -->
+        <!-- Email Field -->
         <div class="mb-3">
-          <label for="username" class="block text-900 font-medium mb-2">
-            Username
+          <label for="email" class="block text-900 font-medium mb-2">
+            Email
           </label>
           <InputText
-            id="username"
-            v-model="username"
-            type="text"
-            placeholder="Username"
+            id="email"
+            v-model="email"
+            type="email"
+            placeholder="Email"
             class="w-full"
             required
           />
@@ -49,14 +49,14 @@
         <div class="flex align-items-center justify-content-between mb-6">
           <div class="flex align-items-center">
             <Checkbox
-              id="rememberme"
+              inputId="rememberme"
               :binary="true"
               v-model="rememberMe"
               class="mr-2"
             />
             <label for="rememberme" class="font-medium">Remember me</label>
           </div>
-          <a class="font-bold text-primary-600 hover:underline cursor-pointer">
+          <a @click="handleForgotPassword" class="font-bold text-primary-600 hover:underline cursor-pointer">
             Forgot password?
           </a>
         </div>
@@ -72,55 +72,66 @@
 
         <!-- Error Message -->
         <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
+
+        <!-- Reset Message -->
+        <p v-if="resetMessage" class="text-green-500 mt-4 font-medium">{{ resetMessage }}</p>
       </form>
     </div>
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
-import InputText from "primevue/inputtext";
-import Button from "primevue/button";
-import Checkbox from "primevue/checkbox";
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { auth, signInWithEmailAndPassword, sendPasswordResetEmail } from '../firebase/firebase.js';
+import Checkbox from 'primevue/checkbox';
 
-export default {
-  components: {
-    InputText,
-    Button,
-    Checkbox,
-  },
+const router = useRouter();
+const email = ref('');
+const password = ref('');
+const rememberMe = ref(false);
+const error = ref('');
+const resetMessage = ref('');
 
-  data() {
-    return {
-      rememberMe: false,
-    };
-  },
-  name: "LoginView",
-  setup() {
-    const username = ref("");
-    const password = ref("");
-    const error = ref("");
-    const rememberMe = ref(false);
+const handleLogin = async () => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
+    const user = userCredential.user;
+    
+    
+    // Store authentication state
+    sessionStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userEmail', user.email);
+    
+    // Navigate to the home page
+    router.push('/home');
+    console.log('User email:', user.email);
+  } catch (err) {
+    error.value = 'Invalid email or password.';
+    console.error('Login error:', err);
+  }
+};
 
-    const handleLogin = () => {
-      if (username.value === "admin" && password.value === "password") {
-        // Hardcoded credentials
-        localStorage.setItem("isAuthenticated", "true"); // Store authentication state
-        error.value = "";
-        // Navigate to the home page
-        window.location.href = "/home";
-      } else {
-        window.location.href = "/access-denied";
-      }
-    };
+const handleForgotPassword = async () => {
+  if (!email.value) {
+    alert('Please enter your email address.');
+    return;
+  }
 
-    return {
-      username,
-      password,
-      error,
-      handleLogin,
-    };
-  },
+  try {
+    await sendPasswordResetEmail(auth, email.value);
+    alert('Password reset email sent. Please check your inbox.');
+    resetMessage.value = '';
+    error.value = ''; 
+  } catch (err) {
+    if (err.code === 'auth/user-not-found') {
+      alert('No account found with this email address.');
+    } else {
+      alert('Error sending password reset email');
+    }
+    console.error('Password reset error:', err);
+  }
 };
 </script>
 
@@ -161,5 +172,31 @@ export default {
 .p-inputtext:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Add these styles to ensure the checkbox is visible */
+:deep(.p-checkbox) {
+  width: 20px;
+  height: 20px;
+}
+
+:deep(.p-checkbox .p-checkbox-box) {
+  border: 2px solid #ced4da;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  color: #495057;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+:deep(.p-checkbox .p-checkbox-box.p-highlight) {
+  border-color: #3B82F6;
+  background: #3B82F6;
+}
+
+:deep(.p-checkbox .p-checkbox-box .p-checkbox-icon) {
+  font-size: 14px;
+  font-weight: bold;
 }
 </style>
