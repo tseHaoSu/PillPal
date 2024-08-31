@@ -38,6 +38,7 @@ const items = [
       localStorage.removeItem("isAuthenticated");
       window.location.href = "/";
     },
+    class: 'logout-item'
   },
 ];
 </script>
@@ -130,5 +131,15 @@ const items = [
   > .p-menuitem-link:hover
   .p-menuitem-icon {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.menubar-custom :deep(.p-menubar-root-list) {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menubar-custom :deep(.logout-item) {
+  margin-left: auto;
 }
 </style>

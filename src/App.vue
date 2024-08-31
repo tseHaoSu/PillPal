@@ -11,5 +11,3 @@ import MenuBar from "./components/MenuBar.vue";
     <router-view></router-view>
   </main>
 </template>
-
-
