@@ -26,11 +26,14 @@
             type="email"
             placeholder="Email"
             class="w-full"
+            :class="{ 'p-invalid': errors.email }"
+            @blur="validateEmail"
             required
           />
+          <small class="p-error" v-if="errors.email">{{ errors.email }}</small>
         </div>
 
-        <!-- Password Field -->
+        <!-- Password -->
         <div class="mb-3">
           <label for="password" class="block text-900 font-medium mb-2">
             Password
@@ -41,11 +44,14 @@
             type="password"
             placeholder="Password"
             class="w-full"
+            :class="{ 'p-invalid': errors.password }"
+            @blur="validatePassword"
             required
           />
+          <small class="p-error" v-if="errors.password">{{ errors.password }}</small>
         </div>
 
-        <!-- Confirm Password Field -->
+        <!-- Confirm Password-->
         <div class="mb-3">
           <label for="confirmPassword" class="block text-900 font-medium mb-2">
             Confirm Password
@@ -56,8 +62,11 @@
             type="password"
             placeholder="Confirm Password"
             class="w-full"
+            :class="{ 'p-invalid': errors.confirmPassword }"
+            @blur="validateConfirmPassword"
             required
           />
+          <small class="p-error" v-if="errors.confirmPassword">{{ errors.confirmPassword }}</small>
         </div>
 
         <!-- Terms and Conditions -->
@@ -67,6 +76,8 @@
               id="acceptTerms"
               :binary="true"
               v-model="acceptTerms"
+              :class="{ 'p-invalid': errors.acceptTerms }"
+              @blur="validateTerms"
               class="mr-2"
             />
             <label for="acceptTerms" class="font-medium"
@@ -74,6 +85,7 @@
             >
           </div>
         </div>
+        <small class="p-error" v-if="errors.acceptTerms">{{ errors.acceptTerms }}</small>
 
         <!-- Submit Button -->
         <button
@@ -84,8 +96,8 @@
           <span class="p-button-label">Register</span>
         </button>
 
-        <!-- Error Message -->
-        <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
+        <!-- General Error Message -->
+        <p v-if="generalError" class="text-red-500 mt-4 font-medium">{{ generalError }}</p>
       </form>
     </div>
   </div>
@@ -105,24 +117,14 @@ const acceptTerms = ref(false);
 const errors = ref({});
 const generalError = ref("");
 
-const isValidEmail = (email) => {
-  return email.includes("@") && email.includes(".");
-};
+const isValidEmail = (email) => email.includes('@') && email.includes('.');
 
 const isValidPassword = (password) => {
-  if(password.length < 8) {
-    return false;
-  }
-  if(!/[A-Z]/.test(password)) {
-    return false;
-  }
-  if(!/[0-9]/.test(password)) {
-    return false;
-  }
-  return true;
+  return password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password);
 };
 
 const validateEmail = () => {
+  errors.value.email = "";
   if (!email.value) {
     errors.value.email = "Email is required.";
   } else if (!isValidEmail(email.value)) {
@@ -131,57 +133,67 @@ const validateEmail = () => {
 };
 
 const validatePassword = () => {
+  errors.value.password = "";
   if (!password.value) {
     errors.value.password = "Password is required.";
   } else if (!isValidPassword(password.value)) {
-    errors.value.password = "Password requires 8 characters, 1 uppercase letter, and 1 number.";
+    errors.value.password = "Password must be at least 8 characters long, contain at least one uppercase letter and one number.";
   }
-}
+};
 
 const validateConfirmPassword = () => {
+  errors.value.confirmPassword = "";
   if (!confirmPassword.value) {
-    errors.value.confirmPassword = "Confirm password is required.";
+    errors.value.confirmPassword = "Please confirm your password.";
   } else if (password.value !== confirmPassword.value) {
     errors.value.confirmPassword = "Passwords do not match.";
   }
 };
 
 const validateTerms = () => {
+  errors.value.acceptTerms = "";
   if (!acceptTerms.value) {
-    errors.value.acceptTerms = "You must accept the terms and conditions.";
+    errors.value.acceptTerms = "Please accept the terms and conditions.";
   }
 };
 
 const validateForm = () => {
-  errors.value = {};
   validateEmail();
   validatePassword();
   validateConfirmPassword();
   validateTerms();
-  return Object.keys(errors.value).length === 0;
+  return Object.values(errors.value).every(error => error === "");
+};
+
+const handleFirebaseError = (error) => {
+  console.error("Registration error:", error);
+  switch (error.code) {
+    case "auth/email-already-in-use":
+      errors.value.email = "This email is already in use.";
+      break;
+    case "auth/invalid-email":
+      errors.value.email = "Invalid email format.";
+      break;
+    case "auth/weak-password":
+      errors.value.password = "Password is too weak. It should be at least 6 characters long.";
+      break;
+    default:
+      generalError.value = "An error occurred during registration. Please try again.";
+  }
 };
 
 const handleRegister = async () => {
-  if (!validateForm()) {
-    return;
-  }
+  generalError.value = "";
+  
+  if (!validateForm()) return;
+
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
-    console.log("User registered:", userCredential.user);
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
     router.push("/login");
-  } catch (err) {
-    console.error("Registration error:", err);
-    switch(err.code){
-    case "auth/email-already-in-use":
-      generalError.value = "Email is already in use.";
-      break;
-    }
-    alert("Error registering.")
+  } catch (error) {
+    handleFirebaseError(error);
   }
-}
-
-
-
+};
 </script>
 
 <style scoped>
@@ -221,5 +233,15 @@ const handleRegister = async () => {
 .p-inputtext:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.p-invalid {
+  border-color: #e24c4c !important;
+}
+
+.p-error {
+  color: #e24c4c;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 </style>
