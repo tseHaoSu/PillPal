@@ -71,12 +71,11 @@
 
         <!-- Accept Terms Checkbox -->
         <div class="mb-3">
-          <Checkbox
+          <input
+            type="checkbox"
             id="acceptTerms"
             v-model="acceptTerms"
-            :binary="true"
-            :class="{ 'p-invalid': errors.acceptTerms }"
-            @blur="validateTerms"
+            @change="validateTerms"
           />
           <label for="acceptTerms" class="ml-2">I agree to the terms and conditions</label>
           <small class="p-error block" v-if="errors.acceptTerms">{{ errors.acceptTerms }}</small>

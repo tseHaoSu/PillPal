@@ -92,6 +92,7 @@ const rememberMe = ref(false);
 const error = ref('');
 const resetMessage = ref('');
 
+
 const handleLogin = async () => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
