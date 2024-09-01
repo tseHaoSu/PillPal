@@ -33,7 +33,7 @@
           <small class="p-error" v-if="errors.email">{{ errors.email }}</small>
         </div>
 
-        <!-- Password -->
+        <!-- Password Field -->
         <div class="mb-3">
           <label for="password" class="block text-900 font-medium mb-2">
             Password
@@ -51,7 +51,7 @@
           <small class="p-error" v-if="errors.password">{{ errors.password }}</small>
         </div>
 
-        <!-- Confirm Password-->
+        <!-- Confirm Password Field -->
         <div class="mb-3">
           <label for="confirmPassword" class="block text-900 font-medium mb-2">
             Confirm Password
@@ -69,23 +69,18 @@
           <small class="p-error" v-if="errors.confirmPassword">{{ errors.confirmPassword }}</small>
         </div>
 
-        <!-- Terms and Conditions -->
-        <div class="flex align-items-center justify-content-between mb-6">
-          <div class="flex align-items-center">
-            <Checkbox
-              id="acceptTerms"
-              :binary="true"
-              v-model="acceptTerms"
-              :class="{ 'p-invalid': errors.acceptTerms }"
-              @blur="validateTerms"
-              class="mr-2"
-            />
-            <label for="acceptTerms" class="font-medium"
-              >I agree to the terms and conditions</label
-            >
-          </div>
+        <!-- Accept Terms Checkbox -->
+        <div class="mb-3">
+          <Checkbox
+            id="acceptTerms"
+            v-model="acceptTerms"
+            :binary="true"
+            :class="{ 'p-invalid': errors.acceptTerms }"
+            @blur="validateTerms"
+          />
+          <label for="acceptTerms" class="ml-2">I agree to the terms and conditions</label>
+          <small class="p-error block" v-if="errors.acceptTerms">{{ errors.acceptTerms }}</small>
         </div>
-        <small class="p-error" v-if="errors.acceptTerms">{{ errors.acceptTerms }}</small>
 
         <!-- Submit Button -->
         <button
@@ -241,13 +236,78 @@ const handleRegister = async () => {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
 }
 
-.p-invalid {
-  border-color: #e24c4c !important;
+/* Add these styles to ensure the checkbox is visible */
+:deep(.p-checkbox) {
+  width: 20px;
+  height: 20px;
 }
 
-.p-error {
-  color: #e24c4c;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+:deep(.p-checkbox .p-checkbox-box) {
+  border: 2px solid #ced4da;
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  color: #495057;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+:deep(.p-checkbox .p-checkbox-box.p-highlight) {
+  border-color: #3B82F6;
+  background: #3B82F6;
+}
+
+:deep(.p-checkbox .p-checkbox-box .p-checkbox-icon) {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 576px) {
+  .surface-card {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+
+  .flex.align-items-center.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flex.align-items-center.justify-content-between > div {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .surface-card {
+    width: 80%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .surface-card {
+    width: 70%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+  .surface-card {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .surface-card {
+    width: 60%;
+    max-width: 600px;
+  }
 }
 </style>

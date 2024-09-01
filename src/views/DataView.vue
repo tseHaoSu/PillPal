@@ -63,68 +63,61 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import productsData from "@/assets/json/products.json";
 import StarRating from "vue-star-rating";
 
-export default {
-  components: {
-    StarRating,
-  },
-  data() {
-    return {
-      products: [],
-      columns: [
-        { field: "id", header: "ID" },
-        { field: "name", header: "Name" },
-        { field: "price", header: "$ Price" },
-        { field: "category", header: "Category" },
-        { field: "rating", header: "Rating" },
-      ],
-      fields: [
-        { id: "id", label: "ID" },
-        { id: "name", label: "Name" },
-        { id: "price", label: "Price" },
-        { id: "category", label: "Category" },
-      ],
-      formData: {
-        id: null,
-        name: null,
-        price: null,
-        category: null,
-        rating: 0,
-      },
-    };
-  },
-  created() {
-    //Initialzie the local storage with json data
-    this.products = productsData;
-    const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-    this.products = [...productsData, ...storedProducts];
-    this.saveToLocalStorage();
-  },
-  methods: {
-    handleSubmit() {
-      const newProduct = {
-        ...this.formData,
-        id:
-          this.products.length > 0
-            ? Math.max(...this.products.map((p) => p.id)) + 1
-            : 1,
-        rating: parseFloat(this.formData.rating) || 0,
-        price: parseFloat(this.formData.price) || 0,
-      };
-      this.products.unshift(newProduct);
-      this.saveToLocalStorage();
-      this.clearForm();
-    },
-    clearForm() {
-      Object.keys(this.formData).forEach((key) => (this.formData[key] = null));
-    },
-    saveToLocalStorage() {
-      localStorage.setItem("products", JSON.stringify(this.products));
-    },
-  },
+const products = ref([]);
+const columns = ref([
+  { field: "id", header: "ID" },
+  { field: "name", header: "Name" },
+  { field: "price", header: "$ Price" },
+  { field: "category", header: "Category" },
+  { field: "rating", header: "Rating" },
+]);
+const fields = ref([
+  { id: "id", label: "ID" },
+  { id: "name", label: "Name" },
+  { id: "price", label: "Price" },
+  { id: "category", label: "Category" },
+]);
+const formData = ref({
+  id: null,
+  name: null,
+  price: null,
+  category: null,
+  rating: 0,
+});
+
+onMounted(() => {
+  //Initialize the local storage with json data
+  const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+  products.value = [...productsData, ...storedProducts];
+  saveToLocalStorage();
+});
+
+const handleSubmit = () => {
+  const newProduct = {
+    ...formData.value,
+    id:
+      products.value.length > 0
+        ? Math.max(...products.value.map((p) => p.id)) + 1
+        : 1,
+    rating: parseFloat(formData.value.rating) || 0,
+    price: parseFloat(formData.value.price) || 0,
+  };
+  products.value.unshift(newProduct);
+  saveToLocalStorage();
+  clearForm();
+};
+
+const clearForm = () => {
+  Object.keys(formData.value).forEach((key) => (formData.value[key] = null));
+};
+
+const saveToLocalStorage = () => {
+  localStorage.setItem("products", JSON.stringify(products.value));
 };
 </script>
 
@@ -211,7 +204,6 @@ export default {
   border-color: #475569;
 }
 
-/* Add this if you want to override PrimeVue's default focus styles */
 .custom-button:focus {
   box-shadow:
     0 0 0 2px #ffffff,
@@ -301,12 +293,75 @@ export default {
   vertical-align: middle;
 }
 
-/* Add these new styles */
 .float-label {
   position: relative;
 }
 
 .star-rating-wrapper {
-  min-height: 60px; /* Adjust this value to match your input height */
+  min-height: 60px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 576px) {
+  .surface-card {
+    padding: 1rem;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .custom-button {
+    width: 100%;
+  }
+
+  :deep(.p-datatable .p-datatable-thead > tr > th),
+  :deep(.p-datatable .p-datatable-tbody > tr > td) {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .surface-card {
+    width: 90%;
+    max-width: none;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .surface-card {
+    width: 80%;
+    max-width: none;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+  .surface-card {
+    width: 70%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .surface-card {
+    width: 60%;
+    max-width: 1200px;
+  }
 }
 </style>

@@ -96,15 +96,10 @@ const handleLogin = async () => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
-    // Store authentication state
     sessionStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', user.email);
-    alert ('Login successful');
-    
-    // Navigate to the home page
     router.push('/home');
-    console.log('User email:', user.email);
   } catch (err) {
     error.value = 'Invalid email or password.';
     console.error('Login error:', err);
@@ -118,8 +113,7 @@ const handleForgotPassword = async () => {
   }
   try {
     await sendPasswordResetEmail(auth, email.value);
-    alert('Password reset email sent. Please check your inbox.');
-    resetMessage.value = '';
+    resetMessage.value = 'Password reset email sent. Please check your inbox.';
     error.value = ''; 
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
@@ -195,5 +189,53 @@ const handleForgotPassword = async () => {
 :deep(.p-checkbox .p-checkbox-box .p-checkbox-icon) {
   font-size: 14px;
   font-weight: bold;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 576px) {
+  .surface-card {
+    padding: 1rem;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+
+  .flex.align-items-center.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flex.align-items-center.justify-content-between > div {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .surface-card {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .surface-card {
+    width: 70%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+  .surface-card {
+    width: 80%;
+    max-width: none;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .surface-card {
+    width: 100%;
+    max-width: 600px;
+  }
 }
 </style>
