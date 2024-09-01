@@ -41,8 +41,8 @@ const routes = [
     component: RegistrationView,
   },
   {
-    path: '/',
-    redirect: '/login',
+    path: "/",
+    redirect: "/login",
   },
 ];
 

@@ -48,7 +48,9 @@
             @blur="validatePassword"
             required
           />
-          <small class="p-error" v-if="errors.password">{{ errors.password }}</small>
+          <small class="p-error" v-if="errors.password">{{
+            errors.password
+          }}</small>
         </div>
 
         <!-- Confirm Password Field -->
@@ -66,7 +68,9 @@
             @blur="validateConfirmPassword"
             required
           />
-          <small class="p-error" v-if="errors.confirmPassword">{{ errors.confirmPassword }}</small>
+          <small class="p-error" v-if="errors.confirmPassword">{{
+            errors.confirmPassword
+          }}</small>
         </div>
 
         <!-- Accept Terms Checkbox -->
@@ -77,8 +81,12 @@
             v-model="acceptTerms"
             @change="validateTerms"
           />
-          <label for="acceptTerms" class="ml-2">I agree to the terms and conditions</label>
-          <small class="p-error block" v-if="errors.acceptTerms">{{ errors.acceptTerms }}</small>
+          <label for="acceptTerms" class="ml-2"
+            >I agree to the terms and conditions</label
+          >
+          <small class="p-error block" v-if="errors.acceptTerms">{{
+            errors.acceptTerms
+          }}</small>
         </div>
 
         <!-- Submit Button -->
@@ -91,7 +99,9 @@
         </button>
 
         <!-- General Error Message -->
-        <p v-if="generalError" class="text-red-500 mt-4 font-medium">{{ generalError }}</p>
+        <p v-if="generalError" class="text-red-500 mt-4 font-medium">
+          {{ generalError }}
+        </p>
       </form>
     </div>
   </div>
@@ -110,7 +120,7 @@ const acceptTerms = ref(false);
 const errors = ref({});
 const generalError = ref("");
 
-const isValidEmail = (email) => email.includes('@') && email.includes('.');
+const isValidEmail = (email) => email.includes("@") && email.includes(".");
 
 const isValidPassword = (password) => {
   return password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password);
@@ -130,7 +140,8 @@ const validatePassword = () => {
   if (!password.value) {
     errors.value.password = "Password is required.";
   } else if (!isValidPassword(password.value)) {
-    errors.value.password = "Password must be at least 8 characters long, contain at least one uppercase letter and one number.";
+    errors.value.password =
+      "Password must be at least 8 characters long, contain at least one uppercase letter and one number.";
   }
 };
 
@@ -155,7 +166,7 @@ const validateForm = () => {
   validatePassword();
   validateConfirmPassword();
   validateTerms();
-  return Object.values(errors.value).every(error => error === "");
+  return Object.values(errors.value).every((error) => error === "");
 };
 
 const handleFirebaseError = (error) => {
@@ -168,10 +179,12 @@ const handleFirebaseError = (error) => {
       errors.value.email = "Invalid email format.";
       break;
     case "auth/weak-password":
-      errors.value.password = "Password is too weak. It should be at least 6 characters long.";
+      errors.value.password =
+        "Password is too weak. It should be at least 6 characters long.";
       break;
     default:
-      generalError.value = "An error occurred during registration. Please try again.";
+      generalError.value =
+        "An error occurred during registration. Please try again.";
   }
 };
 
@@ -180,7 +193,11 @@ const handleRegister = async () => {
   if (!validateForm()) return;
   try {
     //fireabse auto login after registration
-    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value,
+    );
     const user = userCredential.user;
     console.log("User registered:", user.email);
     alert("Registration successful! Please log in to continue.");
@@ -248,12 +265,16 @@ const handleRegister = async () => {
   height: 20px;
   color: #495057;
   border-radius: 4px;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 :deep(.p-checkbox .p-checkbox-box.p-highlight) {
-  border-color: #3B82F6;
-  background: #3B82F6;
+  border-color: #3b82f6;
+  background: #3b82f6;
 }
 
 :deep(.p-checkbox .p-checkbox-box .p-checkbox-icon) {

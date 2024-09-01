@@ -15,16 +15,14 @@ const isAuthenticated = ref(false);
 const userEmail = ref(localStorage.getItem("userEmail") || "");
 const unsubscribe = ref(null);
 
-
 onMounted(() => {
   unsubscribe.value = onAuthStateChanged(auth, (user) => {
     isAuthenticated.value = !!user;
     if (user) {
       sessionStorage.setItem("isAuthenticated", "true");
       userEmail.value = user.email;
-      localStorage.setItem("userEmail", user.email); 
-    }
-    else {
+      localStorage.setItem("userEmail", user.email);
+    } else {
       sessionStorage.removeItem("isAuthenticated");
       localStorage.removeItem("userEmail");
       userEmail.value = "";
@@ -70,13 +68,12 @@ const computedItems = computed(() => [
     label: "Logout",
     icon: "pi pi-fw pi-power-off",
     command: handleLogout,
-    class: 'logout-item'
+    class: "logout-item",
   },
   {
     label: `Hello ${userEmail.value}`,
-    icon:"pi pi-fw pi-user",
-  }
- 
+    icon: "pi pi-fw pi-user",
+  },
 ]);
 </script>
 

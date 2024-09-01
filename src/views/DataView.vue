@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 import productsData from "@/assets/json/products.json";
 import StarRating from "vue-star-rating";
 

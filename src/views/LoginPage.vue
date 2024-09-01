@@ -56,7 +56,10 @@
             />
             <label for="rememberme" class="font-medium">Remember me</label>
           </div>
-          <a @click="handleForgotPassword" class="font-bold text-primary-600 hover:underline cursor-pointer">
+          <a
+            @click="handleForgotPassword"
+            class="font-bold text-primary-600 hover:underline cursor-pointer"
+          >
             Forgot password?
           </a>
         </div>
@@ -74,55 +77,64 @@
         <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
 
         <!-- Reset Message -->
-        <p v-if="resetMessage" class="text-green-500 mt-4 font-medium">{{ resetMessage }}</p>
+        <p v-if="resetMessage" class="text-green-500 mt-4 font-medium">
+          {{ resetMessage }}
+        </p>
       </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { auth, signInWithEmailAndPassword, sendPasswordResetEmail } from '../firebase/firebase.js';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import {
+  auth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "../firebase/firebase.js";
 
 const router = useRouter();
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 const rememberMe = ref(false);
-const error = ref('');
-const resetMessage = ref('');
-
+const error = ref("");
+const resetMessage = ref("");
 
 const handleLogin = async () => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value,
+    );
     const user = userCredential.user;
-    sessionStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('userEmail', user.email);
-    router.push('/home');
+    sessionStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("userEmail", user.email);
+    router.push("/home");
   } catch (err) {
-    error.value = 'Invalid email or password.';
-    console.error('Login error:', err);
+    error.value = "Invalid email or password.";
+    console.error("Login error:", err);
   }
 };
 
 const handleForgotPassword = async () => {
   if (!email.value) {
-    alert('Please enter your email address.');
+    alert("Please enter your email address.");
     return;
   }
   try {
     await sendPasswordResetEmail(auth, email.value);
-    resetMessage.value = 'Password reset email sent. Please check your inbox.';
-    error.value = ''; 
+    resetMessage.value = "Password reset email sent. Please check your inbox.";
+    error.value = "";
   } catch (err) {
-    if (err.code === 'auth/user-not-found') {
-      alert('No account found with this email address.');
+    if (err.code === "auth/user-not-found") {
+      alert("No account found with this email address.");
     } else {
-      alert('Error sending password reset email');
+      alert("Error sending password reset email");
     }
-    console.error('Password reset error:', err);
+    console.error("Password reset error:", err);
   }
 };
 </script>
@@ -179,12 +191,16 @@ const handleForgotPassword = async () => {
   height: 20px;
   color: #495057;
   border-radius: 4px;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 :deep(.p-checkbox .p-checkbox-box.p-highlight) {
-  border-color: #3B82F6;
-  background: #3B82F6;
+  border-color: #3b82f6;
+  background: #3b82f6;
 }
 
 :deep(.p-checkbox .p-checkbox-box .p-checkbox-icon) {
