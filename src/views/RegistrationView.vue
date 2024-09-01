@@ -107,7 +107,6 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { auth, createUserWithEmailAndPassword } from "../firebase/firebase.js";
-import Checkbox from 'primevue/checkbox';
 
 const router = useRouter();
 const email = ref("");
@@ -184,11 +183,18 @@ const handleFirebaseError = (error) => {
 
 const handleRegister = async () => {
   generalError.value = "";
-  
   if (!validateForm()) return;
-
   try {
-    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    //fireabse auto login after registration
+    const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+    const user = userCredential.user;
+    console.log("User registered:", user.email);
+    alert("Registration successful! Please log in to continue.");
+
+    //sign out user after registration
+    await auth.signOut();
+    sessionStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("isAuthenticated");
     router.push("/login");
   } catch (error) {
     handleFirebaseError(error);

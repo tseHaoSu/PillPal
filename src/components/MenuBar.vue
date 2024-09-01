@@ -1,33 +1,40 @@
 <template>
   <div v-if="isAuthenticated" class="menubar-wrapper">
-    <Menubar :model="items" class="menubar-custom" v-ripple />
+    <Menubar :model="computedItems" class="menubar-custom" v-ripple />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { auth } from "../firebase/firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 const router = useRouter();
 const isAuthenticated = ref(false);
+const userEmail = ref(localStorage.getItem("userEmail") || "");
+const unsubscribe = ref(null);
 
-let unsubscribe;
 
 onMounted(() => {
-  unsubscribe = onAuthStateChanged(auth, (user) => {
+  unsubscribe.value = onAuthStateChanged(auth, (user) => {
     isAuthenticated.value = !!user;
     if (user) {
       sessionStorage.setItem("isAuthenticated", "true");
-    } else {
+      userEmail.value = user.email;
+      localStorage.setItem("userEmail", user.email); 
+    }
+    else {
       sessionStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("userEmail");
+      userEmail.value = "";
+      router.push("/login");
     }
   });
 });
 
 onUnmounted(() => {
-  if (unsubscribe) unsubscribe();
+  if (unsubscribe.value) unsubscribe.value();
 });
 
 //handle logout and clear local storage
@@ -36,13 +43,14 @@ const handleLogout = async () => {
     await auth.signOut();
     sessionStorage.removeItem("isAuthenticated");
     localStorage.removeItem("userEmail");
+    userEmail.value = "";
     router.push("/login");
   } catch (error) {
     console.error("Logout error:", error);
   }
 };
 
-const items = [
+const computedItems = computed(() => [
   {
     label: "About",
     icon: "pi pi-fw pi-info",
@@ -64,7 +72,12 @@ const items = [
     command: handleLogout,
     class: 'logout-item'
   },
-];
+  {
+    label: `Hello ${userEmail.value}`,
+    icon:"pi pi-fw pi-user",
+  }
+ 
+]);
 </script>
 
 <style scoped>

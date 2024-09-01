@@ -17,6 +17,7 @@ import Column from "primevue/column";
 import FloatLabel from "primevue/floatlabel";
 import Inputtext from "primevue/inputtext";
 import Button from "primevue/button";
+import Checkbox from "primevue/checkbox";
 
 //Import PrimeVue CSS files
 import "primevue/resources/themes/saga-blue/theme.css";
@@ -45,6 +46,7 @@ app.component("Column", Column);
 app.component("FloatLabel", FloatLabel);
 app.component("Inputtext", Inputtext);
 app.component("Button", Button);
+app.component("Checkbox", Checkbox);
 
 app.directive("ripple", Ripple);
 

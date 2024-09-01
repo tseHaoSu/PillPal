@@ -84,7 +84,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth, signInWithEmailAndPassword, sendPasswordResetEmail } from '../firebase/firebase.js';
-import Checkbox from 'primevue/checkbox';
 
 const router = useRouter();
 const email = ref('');
@@ -97,12 +96,11 @@ const handleLogin = async () => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
     const user = userCredential.user;
-    
-    
     // Store authentication state
     sessionStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', user.email);
+    alert ('Login successful');
     
     // Navigate to the home page
     router.push('/home');
@@ -118,7 +116,6 @@ const handleForgotPassword = async () => {
     alert('Please enter your email address.');
     return;
   }
-
   try {
     await sendPasswordResetEmail(auth, email.value);
     alert('Password reset email sent. Please check your inbox.');

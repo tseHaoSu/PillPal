@@ -39,11 +39,6 @@ const routes = [
     name: "Data",
     component: DataView,
   },
-  //redirect route
-  {
-    path: "/",
-    redirect: "/login",
-  },
 ];
 
 const router = createRouter({
