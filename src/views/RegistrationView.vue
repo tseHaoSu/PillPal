@@ -23,12 +23,8 @@
           <InputText
             id="email"
             v-model="email"
-            type="email"
-            placeholder="Email"
             class="w-full"
-            :class="{ 'p-invalid': errors.email }"
             @blur="validateEmail"
-            required
           />
           <small class="p-error" v-if="errors.email">{{ errors.email }}</small>
         </div>
@@ -41,12 +37,8 @@
           <InputText
             id="password"
             v-model="password"
-            type="password"
-            placeholder="Password"
             class="w-full"
-            :class="{ 'p-invalid': errors.password }"
             @blur="validatePassword"
-            required
           />
           <small class="p-error" v-if="errors.password">{{
             errors.password
@@ -61,12 +53,8 @@
           <InputText
             id="confirmPassword"
             v-model="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
             class="w-full"
-            :class="{ 'p-invalid': errors.confirmPassword }"
             @blur="validateConfirmPassword"
-            required
           />
           <small class="p-error" v-if="errors.confirmPassword">{{
             errors.confirmPassword

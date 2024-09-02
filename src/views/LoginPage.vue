@@ -23,10 +23,7 @@
           <InputText
             id="email"
             v-model="email"
-            type="email"
-            placeholder="Email"
             class="w-full"
-            required
           />
         </div>
 
@@ -38,10 +35,7 @@
           <InputText
             id="password"
             v-model="password"
-            type="password"
-            placeholder="Password"
             class="w-full"
-            required
           />
         </div>
 
@@ -66,16 +60,23 @@
 
         <!-- Submit Button -->
         <button
-          type="submit"
+          @click="handleLogin"
           class="p-button p-component w-full text-xl font-bold p-3"
         >
           <span class="p-button-icon pi pi-user mr-2"></span>
           <span class="p-button-label">Login</span>
         </button>
-
+        
+        <button
+          @click="handleGoogleLogin"
+          class="p-button p-component w-full text-xl font-bold p-3 mt-3"
+        >
+          <span class="p-button-icon pi pi-star mr-2"></span>
+          <span class="p-button-label">Login with Google</span>
+        </button>
+        
         <!-- Error Message -->
         <p v-if="error" class="text-red-500 mt-4 font-medium">{{ error }}</p>
-
         <!-- Reset Message -->
         <p v-if="resetMessage" class="text-green-500 mt-4 font-medium">
           {{ resetMessage }}
@@ -92,7 +93,9 @@ import {
   auth,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
 } from "../firebase/firebase.js";
+import { signInWithPopup } from "firebase/auth";
 
 const router = useRouter();
 const email = ref("");
@@ -135,6 +138,18 @@ const handleForgotPassword = async () => {
       alert("Error sending password reset email");
     }
     console.error("Password reset error:", err);
+  }
+};
+
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    alert("Directing to the Google login page...");
+    await signInWithPopup(auth, provider);
+    router.push("/home");
+  } catch (err) {
+    error.value = "Error signing in with Google.";
+    console.error("Google login error:", err);
   }
 };
 </script>
