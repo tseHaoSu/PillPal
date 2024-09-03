@@ -7,3 +7,15 @@ node_modules/
 .DS_Store
 
 src/firebase/firebase.js
+
+# Vite cache
+.vite/
+
+#dist
+dist/
+
+#Jetbrains IDE
+.idea/
+
+#ds store
+.DS_Store
