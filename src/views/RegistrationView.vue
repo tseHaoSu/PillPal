@@ -37,6 +37,7 @@
           <InputText
             id="password"
             v-model="password"
+            type="password"
             class="w-full"
             @blur="validatePassword"
           />
@@ -52,6 +53,7 @@
           </label>
           <InputText
             id="confirmPassword"
+            type="password"
             v-model="confirmPassword"
             class="w-full"
             @blur="validateConfirmPassword"

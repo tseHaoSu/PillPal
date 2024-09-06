@@ -5,6 +5,7 @@ import AccessDeniedView from "@/views/AccessDenied.vue";
 import LoginPageView from "@/views/LoginPage.vue";
 import RegistrationView from "@/views/RegistrationView.vue";
 import DataView from "@/views/DataView.vue";
+import LandingPageView from "@/views/LandingPageView.vue";
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: "/",
     redirect: "/login",
   },
+  {
+    path: "/landing",
+    name: "Landing",
+    component: LandingPageView,
+  }
 ];
 
 const router = createRouter({
