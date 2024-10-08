@@ -1,13 +1,10 @@
 <script setup>
-import MenuBar from "./components/MenuBar.vue";
+import { RouterView } from 'vue-router'
+import Toaster from '@/components/ui/toast/Toaster.vue'
 </script>
 
 <template>
-  <header>
-    <MenuBar />
-  </header>
-
-  <main>
-    <router-view></router-view>
-  </main>
+  <Toaster />
+    <RouterView />
 </template>
+
