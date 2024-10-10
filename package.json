@@ -26,7 +26,7 @@
     "firebase-functions": "^6.0.1",
     "lucide-vue-next": "^0.439.0",
     "pinia": "^2.2.2",
-    "radix-vue": "^1.9.5",
+    "radix-vue": "^1.9.7",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "vee-validate": "^4.13.2",

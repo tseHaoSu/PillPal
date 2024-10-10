@@ -1,99 +1,146 @@
 <template>
-    <div class="border rounded-lg shadow-sm overflow-hidden p-4">
-  <form class="space-y-8" @submit="onSubmit">
-    <FormField name="medication">
-      <FormItem class="flex flex-col">
-        <FormLabel>Medication Name</FormLabel>
-        <Input
-          type="medication"
-          placeholder="Medicine name"
-          class="w-[240px]"
-        />
-      </FormItem>
-      <FormItem class="flex flex-col">
-        <FormLabel>Type</FormLabel>
-        <Select>
-          <SelectTrigger class="w-[240px]">
-            <SelectValue placeholder="Select a medication" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>My Medication</SelectLabel>
-              <SelectItem value="aspirin">Aspirin</SelectItem>
-              <SelectItem value="ibuprofen">Ibuprofen</SelectItem>
-              <SelectItem value="acetaminophen">Acetaminophen</SelectItem>
-              <SelectItem value="amoxicillin">Amoxicillin</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </FormItem>
-      <FormItem class="flex flex-col">
-        <FormLabel>Status</FormLabel>
-        <Select>
-          <SelectTrigger class="w-[240px]">
-            <SelectValue placeholder="Select a status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>My Medication</SelectLabel>
-              <SelectItem value="taken">taken</SelectItem>
-              <SelectItem value="pending">not now</SelectItem>
-              <SelectItem value="canceled">canceled</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </FormItem> 
-      <FormItem class="flex flex-col">
-        <FormLabel>Date</FormLabel>
-        <Popover>
-          <PopoverTrigger as-child>
-            <FormControl>
-              <Button
-                variant="outline"
-                :class="[
-                  'w-[240px] ps-3 text-start font-normal',
-                  !value && 'text-muted-foreground',
-                ]"
-              >
-                <span>{{
-                  value ? df.format(toDate(value)) : "Pick a date"
-                }}</span>
-                <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
-              </Button>
-              <input hidden />
-            </FormControl>
-          </PopoverTrigger>
-          <PopoverContent class="w-auto p-0">
-            <Calendar
-              v-model:placeholder="placeholder"
-              v-model="value"
-              calendar-label="Date of birth"
-              initial-focus
-              :min-value="minDate"
-              :max-value="maxDate"
-              @update:model-value="handleDateUpdate"
+  <div class="border rounded-lg shadow-sm overflow-hidden p-4">
+    <form class="space-y-8" @submit="onSubmit">
+      <FormField v-slot="{ field }" name="medicationName">
+        <FormItem class="flex flex-col">
+          <FormLabel>Medication Name</FormLabel>
+          <FormControl>
+            <Input
+              type="text"
+              placeholder="Medicine name"
+              class="w-[240px]"
+              v-bind="field"
             />
-          </PopoverContent>
-        </Popover>
-        <FormDescription>
-          Your date of birth is used to calculate your age.
-        </FormDescription>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <Button type="submit"> Submit </Button>
-  </form>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ field }" name="medicationType">
+        <FormItem class="flex flex-col">
+          <FormLabel>Type</FormLabel>
+          <FormControl>
+            <Select v-bind="field">
+              <SelectTrigger class="w-[240px]">
+                <SelectValue placeholder="Select a medication" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>My Medication</SelectLabel>
+                  <SelectItem value="aspirin">Aspirin</SelectItem>
+                  <SelectItem value="ibuprofen">Ibuprofen</SelectItem>
+                  <SelectItem value="acetaminophen">Acetaminophen</SelectItem>
+                  <SelectItem value="amoxicillin">Amoxicillin</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+
+      <FormField v-slot="{ field }" name="status">
+        <FormItem class="flex flex-col">
+          <FormLabel>Status</FormLabel>
+          <FormControl>
+            <Select v-bind="field">
+              <SelectTrigger class="w-[240px]">
+                <SelectValue placeholder="Select a status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>My Medication</SelectLabel>
+                  <SelectItem value="taken">taken</SelectItem>
+                  <SelectItem value="pending">not now</SelectItem>
+                  <SelectItem value="canceled">canceled</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+
+      <FormField v-slot="{ field }" name="amount">
+        <FormItem class="flex flex-col">
+          <FormControl>
+            <NumberField
+              id="amount"
+              :default-value="50"
+              :format-options="{
+                style: 'currency',
+                currency: 'AUD',
+                currencyDisplay: 'code',
+                currencySign: 'accounting',
+              }"
+              class="w-[240px]"
+              v-bind="field"
+            >
+              <Label for="amount">Amount</Label>
+              <NumberFieldContent>
+                <NumberFieldDecrement />
+                <NumberFieldInput />
+                <NumberFieldIncrement />
+              </NumberFieldContent>
+            </NumberField>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+
+      <FormField v-slot="{ field }" name="date">
+        <FormItem class="flex flex-col">
+          <FormLabel>Date</FormLabel>
+          <Popover>
+            <PopoverTrigger as-child>
+              <FormControl>
+                <Button
+                  variant="outline"
+                  :class="
+                    cn(
+                      'w-[240px] ps-3 text-start font-normal',
+                      !field.value && 'text-muted-foreground'
+                    )
+                  "
+                >
+                  <span>{{
+                    field.value ? formatDate(field.value) : "Pick a date"
+                  }}</span>
+                  <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
+                </Button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent class="w-auto p-0">
+              <Calendar
+                :model-value="field.value ? parseDate(field.value) : undefined"
+                @update:model-value="
+                  (date) => field.onChange(date ? date.toString() : undefined)
+                "
+                calendar-label="Medication Date"
+                initial-focus
+                :min-value="minDate"
+                :max-value="maxDate"
+              />
+            </PopoverContent>
+          </Popover>
+          <FormDescription>
+            The date when the medication was or will be taken.
+          </FormDescription>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+      <Button type="submit">Submit</Button>
+    </form>
   </div>
 </template>
 
 <script setup>
-import { computed, h, ref } from "vue";
+import { h } from "vue";
 import {
   CalendarDate,
   DateFormatter,
   getLocalTimeZone,
-  parseDate,
   today,
+  parseDate,
 } from "@internationalized/date";
 import { toDate } from "radix-vue/date";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
@@ -126,25 +173,44 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  NumberField,
+  NumberFieldContent,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldInput,
+} from "@/components/ui/number-field";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 const df = new DateFormatter("en-US", { dateStyle: "long" });
 
+const formatDate = (date) => {
+  if (date) {
+    return df.format(toDate(parseDate(date)));
+  }
+  return "";
+};
+
 const formSchema = toTypedSchema(
   z.object({
-    dob: z
-      .string()
-      .refine((v) => v, { message: "A date of birth is required." }),
+    medicationName: z.string().min(1, "Medication name is required."),
+    medicationType: z.string().min(1, "Medication type is required."),
+    status: z.string().min(1, "Status is required."),
+    amount: z.number().min(0, "Amount should be positive."),
+    date: z.string().min(1, "A date is required."),
   })
 );
 
-const placeholder = ref();
-const { handleSubmit, setFieldValue, values } = useForm({
+const { handleSubmit } = useForm({
   validationSchema: formSchema,
-});
-
-const value = computed({
-  get: () => (values.dob ? parseDate(values.dob) : undefined),
-  set: (val) => val,
+  // initialValues: {
+  //   medicationName: "",
+  //   medicationType: "",
+  //   status: "",
+  //   amount: 50,
+  //   date: "",
+  // },
 });
 
 const onSubmit = handleSubmit((values) => {
@@ -157,14 +223,6 @@ const onSubmit = handleSubmit((values) => {
     ),
   });
 });
-
-const handleDateUpdate = (v) => {
-  if (v) {
-    setFieldValue("dob", v.toString());
-  } else {
-    setFieldValue("dob", undefined);
-  }
-};
 
 const minDate = new CalendarDate(1900, 1, 1);
 const maxDate = today(getLocalTimeZone());
