@@ -83,21 +83,6 @@
           </Badge>
         </a>
       </nav>
-      <div class="mt-auto">
-        <Card>
-          <CardHeader>
-            <CardTitle>Upgrade to Pro</CardTitle>
-            <CardDescription>
-              Unlock all features and get unlimited access to our support team.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button size="sm" class="w-full">
-              Upgrade
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
     </SheetContent>
   </Sheet>
   </div>
@@ -121,9 +106,9 @@ import { useToast } from 'vue-toastification'
 const router = useRouter()
 const user = useUserStore()
 const navItems = [
-  { name: 'My Pills', icon: Table, href: '/home' },
+  { name: 'Dashboard', icon: Table, href: '/home' },
   { name: 'Make an Appointment', icon: Calendar, href: '#'},
-  { name: 'Information', icon: Users, href: '#' },
+  { name: 'Location', icon: Users, href: '#' },
   { name: 'Analytics', icon: LineChart, href: '/analytics' },
   { name: 'Logout', icon: LogOut, href: '#', action: 'logout' }
 ]

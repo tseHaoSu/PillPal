@@ -1,13 +1,7 @@
 <template>
-  <div class="flex h-screen">
-    <SideNavigation />
-    <div class="flex-1 bg-white p-4 overflow-auto">
-      <h1 class="text-2xl font-bold mb-4 flex items-center">
-        Dashboard
-        <Table class="ml-2 h-6 w-6" />
-      </h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card class="overflow-hidden">
+  <MainLayout title="Dashboard" :icon="Table">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card class="w-full overflow-hidden">
           <CardHeader>
             <CardTitle>Medication</CardTitle>
           </CardHeader>
@@ -15,25 +9,25 @@
             <DataTable :data="tableData" :columns="columns" />
           </CardContent>
         </Card>
-        <Card class="overflow-hidden">
+        <Card class="w-full overflow-hidden">
           <CardHeader>
-            <CardTitle>Appointment</CardTitle>
+            <CardTitle>Log Medication</CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable :data="tableData" :columns="columns" />
+            <InputData />
           </CardContent>
         </Card>
-      </div>
     </div>
-  </div>
+      </MainLayout>     
 </template>
 
 <script setup>
-import SideNavigation from '@/components/SideNavigation.vue';
 import  DataTable  from '@/components/DataTable.vue'
 import { ref } from 'vue'
 import { Table } from 'lucide-vue-next'
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import InputData from '@/components/InputData.vue'
+import MainLayout from '@/components/MainLayout.vue'
 
 const columns = [
   { key: "customer", label: "Customer" },
