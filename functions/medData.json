@@ -1,0 +1,352 @@
+[
+  {
+    "medicationName": "Atorvastatin",
+    "medicationType": "statin",
+    "status": "taken",
+    "amount": 40,
+    "date": "2024-03-15"
+  },
+  {
+    "medicationName": "Lisinopril",
+    "medicationType": "antihypertensive",
+    "status": "not now",
+    "amount": 10,
+    "date": "2024-05-22"
+  },
+  {
+    "medicationName": "Metformin",
+    "medicationType": "antidiabetic",
+    "status": "taken",
+    "amount": 1000,
+    "date": "2024-01-07"
+  },
+  {
+    "medicationName": "Warfarin",
+    "medicationType": "anticoagulant",
+    "status": "canceled",
+    "amount": 5,
+    "date": "2024-09-30"
+  },
+  {
+    "medicationName": "Ibuprofen",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 400,
+    "date": "2024-11-18"
+  },
+  {
+    "medicationName": "Simvastatin",
+    "medicationType": "statin",
+    "status": "not now",
+    "amount": 20,
+    "date": "2024-06-03"
+  },
+  {
+    "medicationName": "Amlodipine",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 5,
+    "date": "2024-02-28"
+  },
+  {
+    "medicationName": "Apixaban",
+    "medicationType": "anticoagulant",
+    "status": "taken",
+    "amount": 2.5,
+    "date": "2024-07-14"
+  },
+  {
+    "medicationName": "Acetaminophen",
+    "medicationType": "analgesic",
+    "status": "not now",
+    "amount": 500,
+    "date": "2024-04-09"
+  },
+  {
+    "medicationName": "Gliclazide",
+    "medicationType": "antidiabetic",
+    "status": "canceled",
+    "amount": 80,
+    "date": "2024-08-25"
+  },
+  {
+    "medicationName": "Rosuvastatin",
+    "medicationType": "statin",
+    "status": "taken",
+    "amount": 10,
+    "date": "2024-12-01"
+  },
+  {
+    "medicationName": "Ramipril",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 2.5,
+    "date": "2024-10-17"
+  },
+  {
+    "medicationName": "Heparin",
+    "medicationType": "anticoagulant",
+    "status": "not now",
+    "amount": 5000,
+    "date": "2024-03-29"
+  },
+  {
+    "medicationName": "Naproxen",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 250,
+    "date": "2024-05-11"
+  },
+  {
+    "medicationName": "Sitagliptin",
+    "medicationType": "antidiabetic",
+    "status": "taken",
+    "amount": 100,
+    "date": "2024-01-23"
+  },
+  {
+    "medicationName": "Pravastatin",
+    "medicationType": "statin",
+    "status": "canceled",
+    "amount": 40,
+    "date": "2024-07-08"
+  },
+  {
+    "medicationName": "Valsartan",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 80,
+    "date": "2024-09-14"
+  },
+  {
+    "medicationName": "Dabigatran",
+    "medicationType": "anticoagulant",
+    "status": "not now",
+    "amount": 150,
+    "date": "2024-11-30"
+  },
+  {
+    "medicationName": "Tramadol",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 50,
+    "date": "2024-04-26"
+  },
+  {
+    "medicationName": "Empagliflozin",
+    "medicationType": "antidiabetic",
+    "status": "taken",
+    "amount": 25,
+    "date": "2024-06-19"
+  },
+  {
+    "medicationName": "Fluvastatin",
+    "medicationType": "statin",
+    "status": "not now",
+    "amount": 80,
+    "date": "2024-02-12"
+  },
+  {
+    "medicationName": "Telmisartan",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 40,
+    "date": "2024-08-07"
+  },
+  {
+    "medicationName": "Enoxaparin",
+    "medicationType": "anticoagulant",
+    "status": "canceled",
+    "amount": 40,
+    "date": "2024-10-23"
+  },
+  {
+    "medicationName": "Diclofenac",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 75,
+    "date": "2024-12-15"
+  },
+  {
+    "medicationName": "Liraglutide",
+    "medicationType": "antidiabetic",
+    "status": "not now",
+    "amount": 1.8,
+    "date": "2024-03-01"
+  },
+  {
+    "medicationName": "Lovastatin",
+    "medicationType": "statin",
+    "status": "taken",
+    "amount": 20,
+    "date": "2024-05-17"
+  },
+  {
+    "medicationName": "Enalapril",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 5,
+    "date": "2024-07-29"
+  },
+  {
+    "medicationName": "Clopidogrel",
+    "medicationType": "anticoagulant",
+    "status": "taken",
+    "amount": 75,
+    "date": "2024-09-04"
+  },
+  {
+    "medicationName": "Codeine",
+    "medicationType": "analgesic",
+    "status": "not now",
+    "amount": 30,
+    "date": "2024-11-11"
+  },
+  {
+    "medicationName": "Dapagliflozin",
+    "medicationType": "antidiabetic",
+    "status": "canceled",
+    "amount": 10,
+    "date": "2024-01-28"
+  },
+  {
+    "medicationName": "Pitavastatin",
+    "medicationType": "statin",
+    "status": "taken",
+    "amount": 2,
+    "date": "2024-04-13"
+  },
+  {
+    "medicationName": "Losartan",
+    "medicationType": "antihypertensive",
+    "status": "not now",
+    "amount": 50,
+    "date": "2024-06-25"
+  },
+  {
+    "medicationName": "Fondaparinux",
+    "medicationType": "anticoagulant",
+    "status": "taken",
+    "amount": 2.5,
+    "date": "2024-08-19"
+  },
+  {
+    "medicationName": "Morphine",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 10,
+    "date": "2024-10-05"
+  },
+  {
+    "medicationName": "Glimepiride",
+    "medicationType": "antidiabetic",
+    "status": "not now",
+    "amount": 4,
+    "date": "2024-12-21"
+  },
+  {
+    "medicationName": "Ezetimibe",
+    "medicationType": "statin",
+    "status": "canceled",
+    "amount": 10,
+    "date": "2024-02-06"
+  },
+  {
+    "medicationName": "Diltiazem",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 60,
+    "date": "2024-04-22"
+  },
+  {
+    "medicationName": "Edoxaban",
+    "medicationType": "anticoagulant",
+    "status": "taken",
+    "amount": 60,
+    "date": "2024-07-09"
+  },
+  {
+    "medicationName": "Celecoxib",
+    "medicationType": "analgesic",
+    "status": "not now",
+    "amount": 200,
+    "date": "2024-09-25"
+  },
+  {
+    "medicationName": "Pioglitazone",
+    "medicationType": "antidiabetic",
+    "status": "taken",
+    "amount": 30,
+    "date": "2024-11-07"
+  },
+  {
+    "medicationName": "Fenofibrate",
+    "medicationType": "statin",
+    "status": "taken",
+    "amount": 145,
+    "date": "2024-01-14"
+  },
+  {
+    "medicationName": "Metoprolol",
+    "medicationType": "antihypertensive",
+    "status": "canceled",
+    "amount": 50,
+    "date": "2024-03-30"
+  },
+  {
+    "medicationName": "Prasugrel",
+    "medicationType": "anticoagulant",
+    "status": "not now",
+    "amount": 10,
+    "date": "2024-05-16"
+  },
+  {
+    "medicationName": "Gabapentin",
+    "medicationType": "analgesic",
+    "status": "taken",
+    "amount": 300,
+    "date": "2024-07-02"
+  },
+  {
+    "medicationName": "Canagliflozin",
+    "medicationType": "antidiabetic",
+    "status": "taken",
+    "amount": 100,
+    "date": "2024-08-28"
+  },
+  {
+    "medicationName": "Bezafibrate",
+    "medicationType": "statin",
+    "status": "not now",
+    "amount": 400,
+    "date": "2024-10-14"
+  },
+  {
+    "medicationName": "Nebivolol",
+    "medicationType": "antihypertensive",
+    "status": "taken",
+    "amount": 5,
+    "date": "2024-12-30"
+  },
+  {
+    "medicationName": "Cilostazol",
+    "medicationType": "anticoagulant",
+    "status": "taken",
+    "amount": 100,
+    "date": "2024-02-15"
+  },
+  {
+    "medicationName": "Pregabalin",
+    "medicationType": "analgesic",
+    "status": "canceled",
+    "amount": 75,
+    "date": "2024-04-01"
+  },
+  {
+    "medicationName": "Vildagliptin",
+    "medicationType": "antidiabetic",
+    "status": "not now",
+    "amount": 50,
+    "date": "2024-06-17"
+  }
+]

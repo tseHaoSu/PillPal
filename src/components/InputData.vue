@@ -25,11 +25,20 @@
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>My Medication</SelectLabel>
-                  <SelectItem value="aspirin">Aspirin</SelectItem>
-                  <SelectItem value="ibuprofen">Ibuprofen</SelectItem>
-                  <SelectItem value="acetaminophen">Acetaminophen</SelectItem>
-                  <SelectItem value="amoxicillin">Amoxicillin</SelectItem>
+                  <SelectLabel>Type</SelectLabel>
+                  <SelectItem value="antihypertensive"
+                    >Antihypertensive (Blood Pressure)</SelectItem
+                  >
+                  <SelectItem value="statin"
+                    >Statin (Cholesterol-Lowering)</SelectItem
+                  >
+                  <SelectItem value="anticoagulant"
+                    >Anticoagulant (Blood Thinner)</SelectItem
+                  >
+                  <SelectItem value="analgesic"
+                    >Analgesic (Pain Reliever)</SelectItem
+                  >
+                  <SelectItem value="antidiabetic">Anti-Diabetic</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
