@@ -3,6 +3,9 @@ node_modules/
 
 #local env files
 .env
+.env.local
+.env.*.local
+sendgrid.env
 
 .DS_Store
 
@@ -20,3 +23,7 @@ dist/
 #ds store
 .DS_Store
 sendgrid.env
+
+#firebase
+.firebase/
+firestore.indexes.json
