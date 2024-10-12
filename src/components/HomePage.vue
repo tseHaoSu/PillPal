@@ -16,6 +16,12 @@
           <CardContent>
             <InputData />
           </CardContent>
+          <CardHeader>
+            <CardTitle>Send Email</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <SendEmail />
+          </CardContent>
         </Card>
     </div>
       </MainLayout>     
@@ -28,6 +34,7 @@ import { Table } from 'lucide-vue-next'
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import InputData from '@/components/InputData.vue'
 import MainLayout from '@/components/MainLayout.vue'
+import SendEmail from '@/components/SendEmail.vue'
 
 const columns = [
   { key: "medicationName", label: "Medication Name" },
@@ -53,6 +60,4 @@ const fetchMedications = async () => {
 };
 
 onMounted(fetchMedications);
-
-
 </script>
