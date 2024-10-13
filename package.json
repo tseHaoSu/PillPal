@@ -21,7 +21,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
-    "express": "^4.21.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "firebase": "^10.14.1",
     "firebase-admin": "^12.5.0",
     "firebase-functions": "^6.0.1",
@@ -32,7 +33,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vee-validate": "^4.13.2",
     "vue": "^3.4.37",
-    "vue-router": "^4.0.13",
+    "vue-router": "^4.4.5",
     "vue-toastification": "^2.0.0-rc.5",
     "vuefire": "^3.2.0",
     "zod": "^3.23.8"

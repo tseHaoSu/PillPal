@@ -93,7 +93,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'vue-router'
-import { createUserWithEmailAndPassword, useFirebaseApp, useFirebaseAuth } from '@/firebaseConfig'
+import { createUserWithEmailAndPassword, getAuth } from '@/firebaseConfig'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ref, reactive } from 'vue'
 
@@ -112,9 +112,8 @@ const errors = reactive({
   confirmPassword: ''
 })
 
-const firebaseApp = useFirebaseApp()
-const auth = useFirebaseAuth()
 const router = useRouter()
+const auth = getAuth()
 
 const validateField = (field) => {
   errors[field] = ''
@@ -151,12 +150,10 @@ const validateForm = () => {
 const register = async () => {
   formError.value = ''
   successMessage.value = ''
-
   if (!validateForm()) {
     formError.value = 'Please correct the errors in the form'
     return
   }
-
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value)
     const user = userCredential.user

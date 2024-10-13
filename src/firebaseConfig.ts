@@ -4,13 +4,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  signInWithRedirect,
   getRedirectResult,
   GoogleAuthProvider,
   sendPasswordResetEmail,
+  signInWithPopup,
+  User,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { useFirebaseApp, useFirebaseAuth, useFirestore } from "vuefire";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,18 +33,45 @@ const auth = getAuth(firebaseApp);
 // Initialize Firestore
 const db = getFirestore(firebaseApp);
 
+// Auth service functions
+const login = async (email: string, password: string): Promise<User> => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user;
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw error;
+  }
+};
+
+const logout = async (): Promise<void> => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Logout failed:", error);
+    throw error;
+  }
+};
+
+
+// Export everything
 export {
   firebaseApp,
   auth,
   db,
   createUserWithEmailAndPassword,
-  useFirebaseApp,
-  useFirebaseAuth,
-  useFirestore,
   signInWithEmailAndPassword,
   signOut,
-  signInWithRedirect,
   getRedirectResult,
   GoogleAuthProvider,
   sendPasswordResetEmail,
+  signInWithPopup,
+  login,
+  logout,
+  getAuth,
+  onAuthStateChanged,
 };

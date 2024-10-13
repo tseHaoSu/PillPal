@@ -144,6 +144,7 @@
 
 <script setup>
 import { h } from "vue";
+import axios from "axios";
 import {
   CalendarDate,
   DateFormatter,
@@ -222,15 +223,25 @@ const { handleSubmit } = useForm({
   // },
 });
 
-const onSubmit = handleSubmit((values) => {
-  toast({
-    title: "You submitted the following values:",
-    description: h(
-      "pre",
-      { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
-      h("code", { class: "text-white" }, JSON.stringify(values, null, 2))
-    ),
-  });
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    const response = await axios.post('https://us-central1-fit5032-79317.cloudfunctions.net/logMedication', values);  
+    toast({
+      title: "Data submitted and imported successfully",
+      description: h(
+        "pre",
+        { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
+        h("code", { class: "text-white" }, JSON.stringify(response.data, null, 2))
+      ),
+    });
+  } catch (error) {
+    console.error('Error submitting and importing data:', error);
+    let errorMessage = "An unexpected error occurred. Please try again.";
+    toast({
+      title: "Error submitting",
+      variant: "destructive",
+    });
+  }
 });
 
 const minDate = new CalendarDate(1900, 1, 1);

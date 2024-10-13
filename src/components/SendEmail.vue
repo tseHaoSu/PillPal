@@ -11,7 +11,7 @@
                   variant="outline"
                   :class="
                     cn(
-                      'w-[280px] justify-start text-left font-normal',
+                      'w-[250px] justify-start text-left font-normal',
                       !field.value && 'text-muted-foreground'
                     )
                   "
@@ -49,6 +49,7 @@
                 type="email"
                 placeholder="Email"
                 v-bind="field"
+                class="w-[240px]"
               />
             </div>
           </FormControl>
@@ -60,6 +61,8 @@
       </FormField>
       <Button type="submit">Send</Button>
     </form>
+    <p v-if="emailError" class="text-red-500">{{ emailError }}</p>
+    <SendEmailAPI ref="sendEmailApiRef" />
   </div>
 </template>
 
@@ -91,6 +94,11 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { toast } from "./ui/toast";
+import SendEmailAPI from "@/components/SendEmailAPI.vue";
+
+const sendEmailApiRef = ref(null);
+const emailError = ref(null);
 
 const df = new DateFormatter("en-US", { dateStyle: "long" });
 
@@ -105,8 +113,16 @@ const { handleSubmit } = useForm({
   validationSchema: formSchema,
 });
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(async (values) => {
   console.log("Form submitted with values:", values);
-  // Handle form submission here
+  emailError.value = null;
+  try {
+    await sendEmailApiRef.value.sendEmail(values.email, values.date);
+    console.log('Email sent successfully');
+    toast.success('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    toast.error('Error sending email');
+  }
 });
 </script>
