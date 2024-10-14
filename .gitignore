@@ -27,3 +27,6 @@ sendgrid.env
 #firebase
 .firebase/
 firestore.indexes.json
+firebaseConfig.ts
+
+package-lock.json
