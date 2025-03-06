@@ -1,5 +1,32 @@
-# Vue 3 + TypeScript + Vite
+# Project Name
+PillPal
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Description
+A platform that allow you to manage, record, nad dispaly your medication information. Other than the original features,  one can book appointment and see other useful statistics.
+
+## Features
+- List of features
+- User authentication
+- Medication management
+- Display medication stats
+- Book appointments
+- API integration 
+- Responsive design
+
+## Tech Stack
+- **Frontend:** Vue.js, Pinia, Tailwind CSS 
+- **Backend:** Firebase, Express 
+- **Database:** Firebase
+- **Deployment:** Github
+
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/)
+- npm or yarn
+
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tseHaoSu/PillPal.git
